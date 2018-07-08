@@ -39,6 +39,8 @@ discovery-server                          v1                  b35fdd15cada      
 config-server                             v1                  f39259fbe80f        2 hours ago         128MB
 ```
 
+Alternatively you can create all images in the sub directory which has a Dockerfile via dockerize.sh script. Script expect the version info for input.
+
 We can explain our microservice architecture as follows;
 
 * We have a config server for serving application config for other app. Running with native profiles for serving config in classpath. 
