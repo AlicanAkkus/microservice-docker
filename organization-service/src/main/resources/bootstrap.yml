@@ -10,3 +10,6 @@ eureka:
     fetch-registry: true
     serviceUrl:
       defaultZone: http://${EUREKA_SERVER_IP:localhost}:${EUREKA_SERVER_PORT:8090}/eureka/
+feign:
+  hystrix:
+    enabled: true
