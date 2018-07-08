@@ -1,0 +1,12 @@
+spring:
+  application:
+    name: employee-service
+  cloud:
+    config:
+      uri: http://${CONGIH_SERVER_IP:localhost}:${CONFIG_SERVER_PORT:8088}
+eureka:
+  client:
+    register-with-eureka: true
+    fetch-registry: false
+    serviceUrl:
+      defaultZone: http://${EUREKA_SERVER_IP:localhost}:${EUREKA_SERVER_PORT:8090}/eureka/

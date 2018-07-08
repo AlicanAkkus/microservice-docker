@@ -1,0 +1,41 @@
+version: '3.3'
+
+services:
+  config-server:
+    image: config-server:v1
+    env_file:
+      - config-server/env/native.env
+    ports:
+      - '8088:8080'
+
+  discovery-server:
+    image: discovery-server:v1
+    env_file:
+      - discovery-server/env/local.env
+    ports:
+      - '8090:8080'
+    depends_on:
+      - config-server
+
+  employee-service:
+    image: employee-service:v1
+    env_file:
+      - employee-service/env/local.env
+    ports:
+      - '8092:8080'
+    depends_on:
+      - discovery-server
+      - config-server
+    restart: on-failure
+
+  organization-service:
+    image: organization-service:v1
+    env_file:
+      - organization-service/env/local.env
+    ports:
+      - '8094:8080'
+    depends_on:
+      - config-server
+      - discovery-server
+      - employee-service
+    restart: on-failure
