@@ -5,11 +5,11 @@ echo "Creating images with version $version"
 
 read -p "Enter maven goals: " mvnCommand
 
+echo Maven clean install has started
 mvn $mvnCommand
 
 for d in *; do
     if [ -f ./$d/Dockerfile ]; then
-        echo Maven clean install has started
 
         echo Creating image $d:$version
         docker build -t $d:$version ./$d
