@@ -5,7 +5,7 @@ echo "Creating images with version $version"
 
 read -p "Enter maven goals: " mvnCommand
 
-echo Maven clean install has started
+echo Maven $mvnCommand has started
 mvn $mvnCommand
 
 for d in *; do

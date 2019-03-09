@@ -1,5 +1,7 @@
 # microservice-docker
 
+We're use Java 11 and Spring Boot 2.1.3.RELEASE version.
+
 We have 4 modules. 2 of these module for infrastructure such as config and discovery server.
 
 Each module has its own Dockerfile and env. files. Env. files contains a ip, port and other settings. We will pass these to spring boot app.
@@ -14,7 +16,7 @@ After creating jars you can create docker image from jar file. Go to each module
 Our Dockerfile is very simple for create image. For example;
 
 ```
-FROM openjdk:8-jdk-alpine
+FROM openjdk:11-jre-slim-sid
 
 WORKDIR /home/app
 COPY target/config-server-0.0.1-SNAPSHOT.jar config-server.jar
