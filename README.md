@@ -121,6 +121,12 @@ Output looks like this ->
 When you go to eureka dashboard you can see 2 service are registered to discovery server;
 ![discovery-server dashboard](./ss/eureka.png)
 
+Also you can scale up the employee service to 2 instance. After scaling up, you could see in two instance of employee service registered to eureka discovery server in dashboard.
+Feign client could pick up one of these for retrieve employee list.  
+![scale up service dashboard](./ss/service-scale.png)
+> You can scale up to 2 instance like this: docker-compose -f docker-compose-local.yml scale employee-service=2
+> Please note that, you should change host port mapping when scaling up.
+
 These service can communicate with service name instead of ip/port.
 
 After all you can stop all of them;
