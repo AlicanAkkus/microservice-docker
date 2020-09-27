@@ -3,6 +3,7 @@ version: '3.3'
 services:
   config-server:
     image: config-server:v1
+    build: ./config-server
     env_file:
       - config-server/env/native.env
     ports:
@@ -10,6 +11,7 @@ services:
 
   discovery-server:
     image: discovery-server:v1
+    build: ./discovery-server
     env_file:
       - discovery-server/env/local.env
     ports:
@@ -19,6 +21,7 @@ services:
 
   employee-service:
     image: employee-service:v1
+    build: ./employee-service
     env_file:
       - employee-service/env/local.env
     ports:
@@ -30,6 +33,7 @@ services:
 
   organization-service:
     image: organization-service:v1
+    build: ./organization-service
     env_file:
       - organization-service/env/local.env
     ports:
