@@ -2,14 +2,14 @@
 
 We're use Java 11 and Spring Boot 2.1.3.RELEASE version.
 
-We have 4 modules. 2 of these module for infrastructure such as config and discovery server.
+We have 4 modules. 2 of these modules for infrastructure such as config and discovery server.
 
-Each module has its own Dockerfile and env. files. Env. files contains a ip, port and other settings. We will pass these to spring boot app.
+Each module has its own Dockerfile and env. files. Env. files contains an ip, port and other settings. We will pass these to spring boot app.
 
 ## Before start
-We are separated CI and CD pipeline. Therefore spring boot jar should be available in your classpath.
+We are separated CI and CD pipeline. Therefore, spring boot jar should be available in your classpath.
 
-Go to root path and run **mvn clean install** for the create all artifacts.
+Go to root path and run **mvn clean install** to create all artifacts.
 
 After creating jars you can create docker image from jar file. Go to each module directory and create docker image.
 
@@ -41,13 +41,13 @@ discovery-server                          v1                  b35fdd15cada      
 config-server                             v1                  f39259fbe80f        2 hours ago         128MB
 ```
 
-Alternatively you can create all images in the sub directory which has a Dockerfile via dockerize.sh script. Script expect the version info for input.
+Alternatively you can create all images in the sub directory which has a Dockerfile via dockerize.sh script. Script expects the version info for input.
 
 We can explain our microservice architecture as follows;
 
 * We have a config server for serving application config for other app. Running with native profiles for serving config in classpath. 
 * We have a discovery server for all service can communicate to other. Running with default profile.
-* We have a employee and organization service. These service pull own configuration from config server and serving own business logic.
+* We have an employee and organization service. These service pull own configuration from config server and serving own business logic.
 * Organization service using employee service with feign client over the discovery service.
 
 Our sample docker-compose file such as below;
@@ -101,6 +101,11 @@ services:
 * Employee service depends on config server and discovery server.
 * Organization service depends on config server, discovery server and employee service.
 
+We can also build images via following command;
+```bash
+docker-compose -f docker-compose-local.yml build
+```
+
 Let's beam up;
 ```
 docker-compose -f docker-compose-local.yml up -d
@@ -118,13 +123,13 @@ Output looks like this ->
 ]
 ```
 
-When you go to eureka dashboard you can see 2 service are registered to discovery server;
+When you go to eureka dashboard you can see 2 services are registered to discovery server;
 ![discovery-server dashboard](./ss/eureka.png)
 
-Also you can scale up the employee service to 2 instance. After scaling up, you could see in two instance of employee service registered to eureka discovery server in dashboard.
+Also, you can scale up the employee service to 2 instances. After scaling up, you could see in two instances of employee service registered to eureka discovery server in dashboard.
 Feign client could pick up one of these for retrieve employee list.  
 ![scale up service dashboard](./ss/service-scale.png)
-> You can scale up to 2 instance like this: docker-compose -f docker-compose-local.yml scale employee-service=2
+> You can scale up to 2 instances like this: docker-compose -f docker-compose-local.yml scale employee-service=2
 > Please note that, you should change host port mapping when scaling up.
 
 These service can communicate with service name instead of ip/port.
