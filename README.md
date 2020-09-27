@@ -101,6 +101,11 @@ services:
 * Employee service depends on config server and discovery server.
 * Organization service depends on config server, discovery server and employee service.
 
+We can also build images via following command;
+```bash
+docker-compose -f docker-compose-local.yml build
+```
+
 Let's beam up;
 ```
 docker-compose -f docker-compose-local.yml up -d
